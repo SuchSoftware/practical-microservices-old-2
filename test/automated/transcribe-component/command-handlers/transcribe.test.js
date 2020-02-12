@@ -6,7 +6,7 @@ const { config } = require('../../../test-helper')
 
 test('It transcribes a video', t => {
   const transcribe = CommandControls.example()
-  const entityStreamName = `transcribe-${transcribe.data.videoId}`
+  const entityStreamName = `transcription-${transcribe.data.videoId}`
 
   // Observe that a message was written
   // Invoke the message handler

@@ -46,26 +46,48 @@ Go through the slides up until "Let's Build It!"
 * Show that the handler key name matches the message type we’re handling
 * Live code the solution
 
+```
+    Transcribe (transcribe) {
+      const { videoId, uri } = transcribe.data
+      const transcription = transcribeVideo(uri)
 
-In the project root
-mkdir tmp
-Recycling Messages
-Git checkout step-004
+      const transcribed = {
+        id: uuid(),
+        type: 'Transcribed',
+        metadata: {
+          traceId: move.metadata.traceId,
+          originStreamName: move.metadata.originStreamName
+        },
+        data: {
+          videoId,
+          transcription
+        }
+      }
+      const streamName = `transcription-${videoId}`
 
-Exercise step-004/001
-What is different about this exercise?
-Could this ever happen?  Crash. Redeployment.
-How the message store code stores position
-We don’t want to reprocess messages.  (Process vs. handle)
-Anyone know what we’re missing? (idempotence)
-Slides on Idempotence and projections
+      return messageStore.write(streamName, transcribed)
+    }
+```
 
-Projecting
-Same step
+## Step 4: Recycling Messages
 
-Exercise step-004/002
-Let’s fill out the projection
-Projections use keys that match the message types as well.  What message type do I need.
+`git checkout step-04`
+
+* Exercise 03-double-handle-transcribe-command.js
+* What is different about this exercise?  (Double calling the handler)
+* Could this ever happen?  (Crash. Redeployment. Restart.)
+* How the message store code stores position
+* We don’t want to reprocess messages.  (Process vs. handle)
+* Anyone know what we’re missing? (idempotence)
+* Slides on Idempotence and projections
+
+## Step 5: Projections
+
+`git checkout step-05`
+
+* Exercise exercises/04-projecting-the-transcription.js
+* Let’s fill out the projection
+* Projections use keys that match the message types as well.  What message type do I need?
 
   Moved (file, moved) {
     return {

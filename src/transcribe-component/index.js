@@ -1,3 +1,5 @@
+const uuid = require('uuid')
+
 // Video for faking the transcription
 function transcribeVideo (uri) {
   return `
@@ -11,13 +13,27 @@ function transcribeVideo (uri) {
 // one of the messages communicated over pub/sub.
 //
 // Fleshing out these handlers is the main activity of the workshop.
-function createHandlers () {
+function createHandlers ({ messageStore }) {
   return {
     Transcribe (transcribe) {
-      // TODO: Write the handler code.  Refer to the event model for the list
-      // of fields in the transcribe command.
+      const { videoId, uri } = transcribe.data
+      const transcription = transcribeVideo(uri)
 
-      return Promise.resolve(true)
+      const transcribed = {
+        id: uuid(),
+        type: 'Transcribed',
+        metadata: {
+          traceId: transcribe.metadata.traceId,
+          originStreamName: transcribe.metadata.originStreamName
+        },
+        data: {
+          videoId,
+          transcription
+        }
+      }
+      const streamName = `transcription-${videoId}`
+
+      return messageStore.write(streamName, transcribed)
     }
   }
 }

@@ -18,6 +18,8 @@ const transcribe = {
 
 config.transcribeComponent.handlers
   .Transcribe(transcribe)
+  // Notice that we call the handler a second time
+  .then(() => config.transcribeComponent.handlers.Transcribe(transcribe))
   .finally(config.messageStore.stop)
 
 console.log('Video transcribed.  Inspect message store.')
