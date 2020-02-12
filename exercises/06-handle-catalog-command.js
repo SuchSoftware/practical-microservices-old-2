@@ -1,7 +1,7 @@
 const uuid = require('uuid/v4')
 
-const { config } = require('../preamble')
-const VideoCatalogControls = require('../../src/video-catalog-component/controls/commands/catalog')
+const { config } = require('./preamble')
+const VideoCatalogControls = require('../src/video-catalog-component/controls/commands/catalog')
 
 const catalog = VideoCatalogControls.example()
 
