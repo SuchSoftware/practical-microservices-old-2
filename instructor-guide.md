@@ -137,12 +137,15 @@ Go through the slides up until "Let's Build It!"
 
 * Respond to our own event
 * Make sure to set the `originStreamName`
-* Use the video’s id for the stream so that idempotence works
+* Use the video’s id for the transcode stream so that idempotence works
 * We expect to see more than 1 command.  Why?  Why does it not matter?
 
 
-* Handling move-file Moved event
+## Step 10: Handling `transcode`'s Transcoded event
 Git checkout step-010
+
+
+
 
 Filter on origin stream name
 If it’s one of ours, idempotently record it
