@@ -6,7 +6,7 @@ This workshop uses [Node.js](https://nodejs.org/en/) for the code and [Docker](h
 
 ## Installation Instructions
 
-1. Install Node.js
+1. Install Node.js v12.13.1
     * If you're on MacOS or *nix, I recommend [`nvm`](https://github.com/nvm-sh/nvm)
     * If you're on Windows, I've heard good things about [`nvm-windows`](https://github.com/coreybutler/nvm-windows)
 2. [Install Docker for your platform](https://docs.docker.com/v17.09/engine/installation/)
@@ -18,8 +18,11 @@ From within the project folder, run `npm install`
 ## Verify Installation
 
 1. Run databases 
-  * `docker-compose rm -sf && docker-compose up`
+  * `docker-compose rm -sf`
+  * `docker-compose up`
 2. Run verification script from this repo
+  * `nvm use`
+  * `npm install`
   * `node script/verify-installation.js`
   * Your results should look something like:
 
