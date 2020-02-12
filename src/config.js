@@ -6,6 +6,7 @@
 const createHomeApplication = require('./home-application')
 const createPostgresClient = require('./postgres-client')
 const createMessageStore = require('./message-store')
+const createTranscodeComponent = require('./transcode-component')
 const createTranscribeComponent = require('./transcribe-component')
 const createViewCountAggregator = require('./view-count-aggregator')
 
@@ -24,18 +25,24 @@ function createConfig ({ env }) {
   const homeApplication = createHomeApplication()
 
   // Components
+  const transcodeComponent = createTranscodeComponent({ messageStore })
   const transcribeComponent = createTranscribeComponent({ messageStore })
 
   // Aggregators
   const viewCountAggregator = createViewCountAggregator()
 
-  const consumers = [transcribeComponent, viewCountAggregator]
+  const consumers = [
+    transcodeComponent,
+    transcribeComponent,
+    viewCountAggregator
+  ]
 
   return {
     consumers,
     env,
     homeApplication,
     messageStore,
+    transcodeComponent,
     transcribeComponent,
     viewCountAggregator
   }

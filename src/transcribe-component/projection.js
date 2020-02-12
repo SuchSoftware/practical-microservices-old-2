@@ -1,5 +1,9 @@
 module.exports = {
-  $init: () => ({ id: null, isTranscribed: false })
+  $init: () => ({ id: null, isTranscribed: false }),
 
-  // TODO: Paste the projection in `04-projecting-the-transcription.js`
+  Transcribed (transcription, transcribed) {
+    transcription.isTranscribed = true
+
+    return transcription
+  }
 }

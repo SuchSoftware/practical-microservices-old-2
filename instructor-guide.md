@@ -39,7 +39,7 @@ Go through the slides up until "Let's Build It!"
 
 `git checkout step-03`
 
-* Exercise 02-handle-transcribe-command.js
+* Exercise `02-handle-transcribe-command.js`
 * Show src/transcribe-component/index.js - we’re receiving the message store now
 * Show src/config.js - We’re passing the message store now
 * Back to src/transcribe-component/index.js - Show the `transcodeVideo` function
@@ -73,7 +73,7 @@ Go through the slides up until "Let's Build It!"
 
 `git checkout step-04`
 
-* Exercise 03-double-handle-transcribe-command.js
+* Exercise `03-double-handle-transcribe-command.js`
 * What is different about this exercise?  (Double calling the handler)
 * Could this ever happen?  (Crash. Redeployment. Restart.)
 * How the message store code stores position
@@ -85,7 +85,7 @@ Go through the slides up until "Let's Build It!"
 `git checkout step-05`
 
 * Slides on Idempotence and projections
-* Exercise exercises/04-projecting-the-transcription.js
+* Exercise `exercises/04-projecting-the-transcription.js`
 * Let’s fill out the projection
 * Projections use keys that match the message types as well.  What message type do I need?
 
@@ -104,7 +104,7 @@ Go through the slides up until "Let's Build It!"
 
 ## Step 6: Adding the Projection to the Handler
 
-`git checkout step-005`
+`git checkout step-06`
 
 * Notice in `src/transcribe-component/index.js` that we’re requiring the projection
 * Show `src/transcribe-component/projection.js` - We need to flesh out this file. Does the projection already exist somewhere?
@@ -113,21 +113,15 @@ Go through the slides up until "Let's Build It!"
 * Move the projection over
 * Re-run `exercises/03-double-handle-transcribe-command.js`, see how only 1 event gets written.
 
-Adding concurrency protection
-Git checkout step-006
+## Step 7: Handle transcode command
 
-No exercise
-Explain concurrency and how the idempotence check won’t work.
-Show use of expected version
-We won’t do a lot with concurrency because we only have 4 hours.  But, when you get to that point, expectedVersion is your friend.
-From this point on, we’ll just assume no-concurrency
-“Transcoding” videos
+`git checkout step-07`
 
-Git checkout step-007
+* Exercise `exercises/05-handle-transcode-command.js`
+* We’re setting aside the transcribe component now (take them back to the event model)
+* Group codes this whole component
+* Given a projection with an `$init` property and a component file with the handler somewhat filled out.  Walk them through what they have to work with.
 
-We’re setting aside the move-file component now
-Group codes this whole component.  Given a projection with an $init property and a component file with the handler somewhat filled out
-Exercise step-007/ 001-handle-transcode-command.js
 Fill out projection and rest of handler
 
 Orchestrating components
