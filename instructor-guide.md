@@ -39,10 +39,10 @@ Go through the slides up until "Let's Build It!"
 
 `git checkout step-03`
 
-* Exercise step-003/001
-* Show src/move-transcribe-component/index.js - we’re receiving the message store now
+* Exercise 02-handle-transcribe-command.js
+* Show src/transcribe-component/index.js - we’re receiving the message store now
 * Show src/config.js - We’re passing the message store now
-* Back to src/transcribe-component/index.js - Show the moveFile function
+* Back to src/transcribe-component/index.js - Show the `transcodeVideo` function
 * Show that the handler key name matches the message type we’re handling
 * Live code the solution
 

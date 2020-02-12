@@ -24,7 +24,7 @@ function createConfig ({ env }) {
   const homeApplication = createHomeApplication()
 
   // Components
-  const transcribeComponent = createTranscribeComponent()
+  const transcribeComponent = createTranscribeComponent({ messageStore })
 
   // Aggregators
   const viewCountAggregator = createViewCountAggregator()
