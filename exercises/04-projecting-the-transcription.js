@@ -6,7 +6,7 @@ const { project } = require('../src/message-store/read')
 const events = [TranscribedControls.example()]
 
 const projection = 
-  $init: () => ({ id: null, isTranscribed: false }),
+  $init: () => ({ isTranscribed: false }),
 
   Transcribed (transcription, transcribed) {
     transcription.isTranscribed = true
