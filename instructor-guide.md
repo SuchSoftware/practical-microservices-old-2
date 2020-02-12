@@ -131,15 +131,17 @@ Go through the slides up until "Let's Build It!"
 * The catalog component will drive the process off of its own events.  It shouldn’t rely on other streams for its own state
 * Get a Catalog command transformed into a Started event
 
+## Step 9: Handling Started and Telling `transcode-component` to Transcode Videos
 
-Handling Received and telling move-file to move the file
-Git checkout step-009
+`git checkout step-09`
 
-Respond to our own event
-Make sure to set the origin stream name
-Use the video’s id for the stream so that idempotence works
-We expect to see more than 1 command.  Why?  Why does it not matter?
-Handling move-file Moved event
+* Respond to our own event
+* Make sure to set the `originStreamName`
+* Use the video’s id for the stream so that idempotence works
+* We expect to see more than 1 command.  Why?  Why does it not matter?
+
+
+* Handling move-file Moved event
 Git checkout step-010
 
 Filter on origin stream name

@@ -10,24 +10,55 @@ const projection = require('./projection')
 function createCommandHandlers ({ messageStore }) {
   return {
     async Catalog (catalog) {
-      // Handle the catalog command
-      // We want to drive the process from events in `videoCatalog` streams.
-      // So, copy the command into a `Received` event in our entity stream.
+      const videoId = catalog.data.videoId
+      const videoStreamName = `catalog-${videoId}`
+      const video = await messageStore.fetch(videoStreamName, projection)
 
-      // 1. Fetch the video entity from the message store
+      if (video.isStarted) {
+        console.log(`(${catalog.id}) Video already started. Skipping`)
 
-      // 2. Make the handler idempotent by checking to see if the video has
-      // already been received.
+        return true
+      }
 
-      // 3. If we haven't, then write a `Received` event
+      const started = {
+        id: uuid(),
+        type: 'Started',
+        metadata: {
+          traceId: catalog.metadata.traceId
+        },
+        data: {
+          videoId: catalog.data.videoId,
+          uri: catalog.data.uri
+        }
+      }
 
-      return Promise.resolve(true)
+      return messageStore.write(videoStreamName, started)
+    }
+  }
+}
+
+function createEventHandlers ({ messageStore }) {
+  return {
+    async Started (received) {
+      // This is where we'll kick off the transcoding
+
+      // TODO: 1. Load the entity
+
+      // TODO: 2. Make the handler idempotent.  Which value from the projection would
+      // tell us we don't need to transcode the file?
+
+      // TODO: 3. Write a Transcode command for transcode
+      //   - Use our entity id as the id for the move command stream name
+      //   - Set the originStreamName in metadata
+
+      return true
     }
   }
 }
 
 function createComponent ({ messageStore }) {
   const commandHandlers = createCommandHandlers({ messageStore })
+  const eventHandlers = createEventHandlers({ messageStore })
 
   function start () {
     console.log('Starting video catalog component')
@@ -35,6 +66,7 @@ function createComponent ({ messageStore }) {
 
   return {
     commandHandlers,
+    eventHandlers,
     start
   }
 }

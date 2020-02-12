@@ -9,6 +9,7 @@ const createMessageStore = require('./message-store')
 const createTranscodeComponent = require('./transcode-component')
 const createTranscribeComponent = require('./transcribe-component')
 const createViewCountAggregator = require('./view-count-aggregator')
+const createCatalogComponent = require('./catalog-component')
 
 // Even the configuration has a dependency, namely the run-time environment.
 function createConfig ({ env }) {
@@ -27,6 +28,7 @@ function createConfig ({ env }) {
   // Components
   const transcodeComponent = createTranscodeComponent({ messageStore })
   const transcribeComponent = createTranscribeComponent({ messageStore })
+  const catalogComponent = createCatalogComponent({ messageStore })
 
   // Aggregators
   const viewCountAggregator = createViewCountAggregator()
@@ -34,6 +36,7 @@ function createConfig ({ env }) {
   const consumers = [
     transcodeComponent,
     transcribeComponent,
+    catalogComponent,
     viewCountAggregator
   ]
 
@@ -44,6 +47,7 @@ function createConfig ({ env }) {
     messageStore,
     transcodeComponent,
     transcribeComponent,
+    catalogComponent,
     viewCountAggregator
   }
 }
