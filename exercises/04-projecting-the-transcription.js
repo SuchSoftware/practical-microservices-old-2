@@ -6,10 +6,13 @@ const { project } = require('../src/message-store/read')
 const events = [TranscribedControls.example()]
 
 const projection = 
-  $init: () => ({ id: null, isTranscribed: false })
+  $init: () => ({ id: null, isTranscribed: false }),
 
-  // TODO: Add handlers for any event types that affect this projection.
-  // In our present case, that's just the "Moved" event
+  Transcribed (transcription, transcribed) {
+    transcription.isTranscribed = true
+  
+    return transcription
+  }
 }
 
 const transcription = project(events, projection)

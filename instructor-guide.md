@@ -102,14 +102,16 @@ Go through the slides up until "Let's Build It!"
 
     ```
 
-Adding the projection to the handler
-Git checkout step-005
+## Step 6: Adding the Projection to the Handler
 
-Notice in src/move-files-component/index.js that we’re requiring the projection
-Show src/move-files-component/projection.js - We need to flesh out this file. Does the projection already exist somewhere?
-Show `project` function in src/message-store/read.js
-Show it being used in index.  Note that the handler is now async.
-Code!  Move the projection over, see how it only gets written once.
+`git checkout step-005`
+
+* Notice in `src/transcribe-component/index.js` that we’re requiring the projection
+* Show `src/transcribe-component/projection.js` - We need to flesh out this file. Does the projection already exist somewhere?
+* Show `project` function in `src/message-store/read.js`
+* Show it being used in the handler.  Note that the handler is now async.
+* Move the projection over
+* Re-run `exercises/03-double-handle-transcribe-command.js`, see how only 1 event gets written.
 
 Adding concurrency protection
 Git checkout step-006

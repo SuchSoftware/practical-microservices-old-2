@@ -1,5 +1,7 @@
 const uuid = require('uuid')
 
+const projection = require('./projection')
+
 // Video for faking the transcription
 function transcribeVideo (uri) {
   return `
@@ -15,9 +17,19 @@ function transcribeVideo (uri) {
 // Fleshing out these handlers is the main activity of the workshop.
 function createHandlers ({ messageStore }) {
   return {
-    Transcribe (transcribe) {
+    async Transcribe (transcribe) {
       const { videoId, uri } = transcribe.data
-      const transcription = transcribeVideo(uri)
+      const streamName = `transcription-${videoId}`
+
+      const transcription = await messageStore.fetch(streamName, projection)
+
+      if (transcription.isTranscribed) {
+        console.log(`Message ${transcribe.id} already handled.  Skipping.`)
+
+        return true
+      }
+
+      const transcriptionText = transcribeVideo(uri)
 
       const transcribed = {
         id: uuid(),
@@ -28,10 +40,9 @@ function createHandlers ({ messageStore }) {
         },
         data: {
           videoId,
-          transcription
+          transcription: transcriptionText
         }
       }
-      const streamName = `transcription-${videoId}`
 
       return messageStore.write(streamName, transcribed)
     }
