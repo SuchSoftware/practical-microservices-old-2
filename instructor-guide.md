@@ -79,25 +79,28 @@ Go through the slides up until "Let's Build It!"
 * How the message store code stores position
 * We don’t want to reprocess messages.  (Process vs. handle)
 * Anyone know what we’re missing? (idempotence)
-* Slides on Idempotence and projections
 
 ## Step 5: Projections
 
 `git checkout step-05`
 
+* Slides on Idempotence and projections
 * Exercise exercises/04-projecting-the-transcription.js
 * Let’s fill out the projection
 * Projections use keys that match the message types as well.  What message type do I need?
 
-  Moved (file, moved) {
-    return {
-      ...file,
-      fileId: moved.data.fileId,
-      source: moved.data.source,
-      destination: moved.data.destination,
-      isMoved: true
+    ```
+    const projection = {
+      $init: () => ({ id: null, isTranscribed: false }),
+
+      Transcribed (transcription, transcribed) {
+        transcription.isTranscribed = true
+
+        return transcription
+      }
     }
-  }
+
+    ```
 
 Adding the projection to the handler
 Git checkout step-005
