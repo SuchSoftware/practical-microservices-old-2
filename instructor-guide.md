@@ -113,7 +113,7 @@ Go through the slides up until "Let's Build It!"
 * Move the projection over
 * Re-run `exercises/03-double-handle-transcribe-command.js`, see how only 1 event gets written.
 
-## Step 7: Handle transcode command
+## Step 7: Handle Transcode Command
 
 `git checkout step-07`
 
@@ -122,16 +122,16 @@ Go through the slides up until "Let's Build It!"
 * Group codes this whole component
 * Given a projection with an `$init` property and a component file with the handler somewhat filled out.  Walk them through what they have to work with.
 
-Fill out projection and rest of handler
+## Step 8: Orchestrating Components
 
-Orchestrating components
+`git checkout step-08`
 
-Git checkout step-008
+* The catalog component needs to get the other 2 to do work
+* The projection is already filled out
+* The catalog component will drive the process off of its own events.  It shouldn’t rely on other streams for its own state
+* Get a Catalog command transformed into a Started event
 
-The catalog component needs to get the other 2 to do work
-The projection is already filled out
-The catalog component will drive the process off of its own events.  It shouldn’t rely on other streams for its own state
-Get a Catalog command transformed into a Received event
+
 Handling Received and telling move-file to move the file
 Git checkout step-009
 
