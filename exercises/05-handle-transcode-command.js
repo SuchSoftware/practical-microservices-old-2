@@ -1,7 +1,7 @@
 const uuid = require('uuid/v4')
 
-const { config } = require('../preamble')
-const TranscodeControls = require('../../src/transcode-component/controls/commands/transcode')
+const { config } = require('./preamble')
+const TranscodeControls = require('../src/transcode-component/controls/commands/transcode')
 
 const transcode = TranscodeControls.example()
 
