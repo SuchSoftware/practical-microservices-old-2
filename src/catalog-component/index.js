@@ -39,7 +39,7 @@ function createCommandHandlers ({ messageStore }) {
 
 function createEventHandlers ({ messageStore }) {
   return {
-    async Started (received) {
+    async Started (started) {
       // This is where we'll kick off the transcoding
 
       // TODO: 1. Load the entity
