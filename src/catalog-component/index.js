@@ -78,8 +78,7 @@ function createTranscodeEventHandlers ({ messageStore }) {
       //   - Where can we find the streamName for the video entity?
       //   - Look at exercises/08-handle-transcoded-event-caused-by-catalog.js
       //     for inspiration.  Look at the event we build there.
-      const streamName = transcoded.metadata.originStreamName
-      const video = await messageStore.fetch(streamName, projection)
+      const streamName = 'where do I get the `catalog` stream name?'
 
       // TODO: 2. Make the handle idempotent.  What property on the video
       // entity tells us if the video has been transcoded?
