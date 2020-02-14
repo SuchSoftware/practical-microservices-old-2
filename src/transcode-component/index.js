@@ -15,7 +15,7 @@ function createHandlers ({ messageStore }) {
   return {
     async Transcode (transcode) {
       // TODO 1. Where do you get the id?
-      const transcodeId = ''
+      const videoId = ''
       // TODO 2. What is the stream name where
       const streamName = ''
       // TODO 3. Which message store function do you use to, um, fetch an entity
@@ -28,9 +28,9 @@ function createHandlers ({ messageStore }) {
 
       // TODO 5. Make it idempotent
       if (false) {
-        console.log(`(${transcode.id}): Already transcoded. Skipping.`)
+        console.log(`(${videoId}): Already transcoded. Skipping.`)
 
-        return Promise.resolve(true)
+        return true
       }
 
       // 6. Do the actual work.  This one is done for you.
@@ -43,16 +43,16 @@ function createHandlers ({ messageStore }) {
           traceId: transcode.metadata.traceId
         },
         data: {
-          transcodeId: transcode.data.transcodeId,
-          uri: transcode.data.source,
+          videoId: transcode.data.videoId,
+          uri: transcode.data.uri,
           transcodedUri,
           processedTime: new Date().toISOString()
         }
       }
 
-      // Instead of just return an empty Promise, write `transcoded` to the
+      // Instead of just returning true, write `transcoded` to the
       // message store, rturning the resulting Promise.
-      return Promise.resolve(true)
+      return true
     }
   }
 }
