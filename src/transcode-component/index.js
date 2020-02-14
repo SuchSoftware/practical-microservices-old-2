@@ -30,7 +30,8 @@ function createHandlers ({ messageStore }) {
         id: uuid(),
         type: 'Transcoded',
         metadata: {
-          traceId: transcode.metadata.traceId
+          traceId: transcode.metadata.traceId,
+          originStreamName: transcode.metadata.originStreamName
         },
         data: {
           videoId: transcode.data.videoId,

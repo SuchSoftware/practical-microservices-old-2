@@ -14,7 +14,8 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
   // ...
   // END: filterOnOriginMatch
   // START: innerShell
-  return ({ // <callout id="co.constructSubscription" />
+  return ({
+    // <callout id="co.constructSubscription" />
     streamName,
     handlers,
     messagesPerTick = 100,
@@ -56,7 +57,7 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
 
       if (messagesSinceLastPositionWrite === positionUpdateInterval) {
         messagesSinceLastPositionWrite = 0
-        
+
         return writePosition(position)
       }
 
@@ -66,16 +67,17 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
 
     // START: messageStore.subscribe.loadPosition
     function loadPosition () {
-      return readLastMessage(subscriberStreamName)
-        .then(message => {
-          currentPosition = message ? message.data.position : 0
-        })
+      return readLastMessage(subscriberStreamName).then(message => {
+        currentPosition = message ? message.data.position : 0
+      })
     }
     // END: messageStore.subscribe.loadPosition
 
     // START: filterOnOriginMatch
-    function filterOnOriginMatch (messages) { // <label id="code.messageStore.filterOnOriginMatch" />
-      if (!originStreamName) { // <label id="code.messageStore.filterOnOriginMatch.bail" />
+    function filterOnOriginMatch (messages) {
+      // <label id="code.messageStore.filterOnOriginMatch" />
+      if (!originStreamName) {
+        // <label id="code.messageStore.filterOnOriginMatch.bail" />
         return messages
       }
 
@@ -91,12 +93,14 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
     // START: getNextBatchOfMessages.with.origin
     // START: messageStore.subscribe.getNextBatchOfMessages
     function getNextBatchOfMessages () {
-      return read(streamName, currentPosition + 1, messagesPerTick)
-        // END: messageStore.subscribe.getNextBatchOfMessages
-        // START_HIGHLIGHT
-        .then(filterOnOriginMatch)
-        // END_HIGHLIGHT
-        // START: messageStore.subscribe.getNextBatchOfMessages
+      return (
+        read(streamName, currentPosition + 1, messagesPerTick)
+          // END: messageStore.subscribe.getNextBatchOfMessages
+          // START_HIGHLIGHT
+          .then(filterOnOriginMatch)
+      )
+      // END_HIGHLIGHT
+      // START: messageStore.subscribe.getNextBatchOfMessages
     }
     // END: messageStore.subscribe.getNextBatchOfMessages
     // END: getNextBatchOfMessages.with.origin
@@ -120,8 +124,7 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
             // Re-throw so that we can break the chain
             throw err
           })
-      )
-        .then(() => messages.length)
+      ).then(() => messages.length)
     }
     // END: messageStore.subscribe.processBatch
 
@@ -187,7 +190,8 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
     // END: messageStore.subscribe.stop
 
     // START: innerShell
-    return { // <callout id="co.subscription.return" />
+    return {
+      // <callout id="co.subscription.return" />
       loadPosition,
       start,
       stop,
@@ -195,8 +199,8 @@ function configureCreateSubscription ({ read, readLastMessage, write }) {
       writePosition
     }
   }
-// START: filterOnOriginMatch
-// START: shell
+  // START: filterOnOriginMatch
+  // START: shell
 }
 // END: innerShell
 // END: filterOnOriginMatch

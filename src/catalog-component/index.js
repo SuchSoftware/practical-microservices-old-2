@@ -45,7 +45,7 @@ function createEventHandlers ({ messageStore }) {
       const video = await messageStore.fetch(streamName, projection)
 
       if (video.isTranscoded) {
-        console.log(`(${received.id}) Video already transcoded. Skipping`)
+        console.log(`(${started.id}) Video already transcoded. Skipping`)
 
         return true
       }
@@ -91,7 +91,7 @@ function createEventHandlers ({ messageStore }) {
         }
       }
 
-      return messageStore.write(streamName, transcribe)
+      return messageStore.write(`transcribe:command-${video.id}`, transcribe)
     },
 
     async Transcribed (transcribed) {

@@ -19,7 +19,7 @@ function createHandlers ({ messageStore }) {
   return {
     async Transcribe (transcribe) {
       const { videoId, uri } = transcribe.data
-      const streamName = `transcription-${videoId}`
+      const streamName = `transcribe-${videoId}`
 
       const transcription = await messageStore.fetch(streamName, projection)
 
