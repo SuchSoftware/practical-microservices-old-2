@@ -5,8 +5,8 @@ const projection = require('./projection')
 // This component has 4 sets of handlers:
 // 1. Its command stream
 // 2. Its event stream
-// 3. move-file's event stream
-// 4. transcode's event stream
+// 3. transcode's event stream
+// 4. transcribe's event stream
 function createCommandHandlers ({ messageStore }) {
   return {
     async Catalog (catalog) {
