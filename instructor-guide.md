@@ -158,24 +158,25 @@ Go through the slides up until "Let's Build It!"
 * Exercise `exercises/09-handle-transcoded-event-in-catalog-stream.js`
 * The handler function for this has not been scaffolded
     * Where will we put the handler?
+    * What is a handler?
 
 
+## Step 12: Doing the Same Thing For Transcription
 
-Handling Transcoded from transcode-component
-Git checkout step-012
+`git checkout step-12`
 
-We got the Transcoded event back from transcode-component
-Make sure it’s ours
-We’ll just walk through code already done because we did basically the same thing with moving the file
+* No exercise
+* We're not doing anything new, so we're not doing this as an exercise
+* But do it as a verbal exercise
 
-Handling Internal transcoded event
-Git checkout step-013
 
-Again just walk through the committed code because it doesn’t do something new
+## Step 13: Subscribing to the Message Store
 
-Subscribing to the message store
+`git checkout step-13`
 
-Git checkout step-014
+* No exercise
+* We're not coding this as a group because how to write the subscription is particular to the code in this workshop.  It isn't going to teach you more about microservices.
+* Do call out the `originStreamName` passed into the subscription for the `transcode` and `transcribe` handlers.
 
 Just plunk the subscriptions in place
 The streamName is the category we’re subscribing to.  To handle commands, we subscribe to the :command stream
