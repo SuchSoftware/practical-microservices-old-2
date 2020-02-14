@@ -72,30 +72,22 @@ function createEventHandlers ({ messageStore }) {
 function createTranscodeEventHandlers ({ messageStore }) {
   return {
     async Transcoded (transcoded) {
-      // 1. Fetch the entity and make the handler idempotent
+      // TODO 1. Fetch the entity and make the handler idempotent
+      //   - The`transcoded` event that we get here was written to a
+      //     `transcode` stream and not to a `catalog` stream.
       //   - Where can we find the streamName for the video entity?
+      //   - Look at exercises/08-handle-transcoded-event-caused-by-catalog.js
+      //     for inspiration.  Look at the event we build there.
       const streamName = transcoded.metadata.originStreamName
       const video = await messageStore.fetch(streamName, projection)
 
-      if (video.isTranscoded) {
-        console.log(`(${transcoded.id}) Video already transcoded. Skipping`)
+      // TODO: 2. Make the handle idempotent.  What property on the video
+      // entity tells us if the video has been transcoded?
 
-        return true
-      }
+      // TODO: 3. Write a Transcoded event to our `catalog` stream to drive
+      // the process forward.
 
-      // 3. Write a Transcoded event to our stream
-      const videoTranscoded = {
-        id: uuid(),
-        type: 'Transcoded',
-        metadata: {
-          traceId: transcoded.metadata.traceId
-        },
-        data: {
-          transcodedUri: transcoded.data.transcodedUri
-        }
-      }
-
-      return messageStore.write(streamName, videoTranscoded)
+      return true
     }
   }
 }
@@ -103,6 +95,7 @@ function createTranscodeEventHandlers ({ messageStore }) {
 function createComponent ({ messageStore }) {
   const commandHandlers = createCommandHandlers({ messageStore })
   const eventHandlers = createEventHandlers({ messageStore })
+  const transcodeEventHandlers = createTranscodeEventHandlers({ messageStore })
 
   function start () {
     console.log('Starting video catalog component')
@@ -111,6 +104,7 @@ function createComponent ({ messageStore }) {
   return {
     commandHandlers,
     eventHandlers,
+    transcodeEventHandlers,
     start
   }
 }
