@@ -11,7 +11,7 @@ module.exports = {
         originStreamName: `catalog-${IdControls.example()}`
       },
       data: {
-        transcodeId: IdControls.example(),
+        videoId: IdControls.example(),
         source: this.source()
       }
     }
