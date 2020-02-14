@@ -24,7 +24,7 @@ module.exports = {
   },
 
   Transcoded (video, transcoded) {
-    video.transcodedUri = transcoded.data.transcodedUri
+    video.uri = transcoded.data.uri
     video.isTranscoded = true
 
     return video
