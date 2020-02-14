@@ -142,25 +142,24 @@ Go through the slides up until "Let's Build It!"
 * Use the video’s id for the transcode stream so that idempotence works
 * We expect to see more than 1 command.  Why?  Why does it not matter?
 
-## Step 10: Handling `transcode`'s Transcoded event
+## Step 10: Handling `transcode`'s Transcoded Event
 
 `git checkout step-10`
 
 * Exercise `exercises/08-handle-transcoded-event-from-us.js`
 * The catalog component will drive the process off of its own events.  It shouldn’t rely on other streams for its own state
 * Idempotently copy the Transcoded event to the catalog stream
+* Talk about how we get the `catalog` stream from the `metadata` on an event in a `transcode` stream.
+
+## Step 11: Handling Our Own Transcoded Event
+
+`git checkout step-11`
+
+* Exercise `exercises/09-handle-transcoded-event-in-catalog-stream.js`
+* The handler function for this has not been scaffolded
+    * Where will we put the handler?
 
 
-Filter on origin stream name
-If it’s one of ours, idempotently record it
-Exercise step-010/001
-
-Handling internal Moved event
-
-Git checkout step-011
-
-This one will be the most challenging one yet
-Exercise
 
 Handling Transcoded from transcode-component
 Git checkout step-012
