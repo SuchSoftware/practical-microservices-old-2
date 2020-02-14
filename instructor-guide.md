@@ -168,6 +168,10 @@ Go through the slides up until "Let's Build It!"
 * No exercise
 * We're not doing anything new, so we're not doing this as an exercise
 * But do it as a verbal exercise
+    * Look in src/catalog-component/index.js.  Where would the Transcription handlers go?
+    * It's the same template as what we did for Transcoded
+    * And then we also handle
+* Then we also handle `catalog`'s `Transcribed` event to write a `Cataloged` event
 
 
 ## Step 13: Subscribing to the Message Store
