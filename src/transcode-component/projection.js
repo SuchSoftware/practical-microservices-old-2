@@ -1,6 +1,6 @@
 module.exports = {
   $init: () => ({
-    transcodeId: null,
+    id: null,
     uri: null,
     transcodedUri: null,
     isTranscoded: false
