@@ -185,8 +185,36 @@ function createComponent ({ messageStore }) {
     messageStore
   })
 
+  const commandSubscription = messageStore.createSubscription({
+    streamName: 'catalog:command',
+    handlers: commandHandlers,
+    subscriberId: 'catalogCommandConsumer'
+  })
+  const eventSubscription = messageStore.createSubscription({
+    streamName: 'catalog',
+    handlers: eventHandlers,
+    subscriberId: 'catalogEventConsumer'
+  })
+  const transcodeEventSubscription = messageStore.createSubscription({
+    streamName: 'transcode',
+    handlers: transcodeEventHandlers,
+    originStreamName: 'catalog',
+    subscriberId: 'catalogTranscodeEventConsumer'
+  })
+  const transcribeEventSubscription = messageStore.createSubscription({
+    streamName: 'transcribe',
+    handlers: transcribeEventHandlers,
+    originStreamName: 'catalog',
+    subscriberId: 'catalogTranscribeEventConsumer'
+  })
+
   function start () {
     console.log('Starting video catalog component')
+
+    commandSubscription.start()
+    eventSubscription.start()
+    transcodeEventSubscription.start()
+    transcribeEventSubscription.start()
   }
 
   return {

@@ -50,8 +50,16 @@ function createHandlers ({ messageStore }) {
 function createComponent ({ messageStore }) {
   const handlers = createHandlers({ messageStore })
 
+  const commandSubscription = messageStore.createSubscription({
+    streamName: 'transcode:command',
+    handlers,
+    subscriberId: 'transcodeCommandConsumer'
+  })
+
   function start () {
     console.log('Starting transcode component')
+
+    commandSubscription.start()
   }
 
   return {

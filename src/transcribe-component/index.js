@@ -53,6 +53,12 @@ function createHandlers ({ messageStore }) {
 function createComponent ({ messageStore }) {
   const handlers = createHandlers({ messageStore })
 
+  const commandSubscription = messageStore.createSubscription({
+    streamName: 'transcribe:command',
+    handlers,
+    subscriberId: 'transcribeCommandConsumer'
+  })
+
   // Components get new messages to process by polling the message store.
   // We decouple actually starting the component from the rest of its
   // definition.  Naturally, starting the polling cycle in test would proveo
@@ -62,6 +68,8 @@ function createComponent ({ messageStore }) {
   // function that gets picked up in `src/index.js`.
   function start () {
     console.log('Starting transcribe component')
+
+    commandSubscription.start()
   }
 
   return {
