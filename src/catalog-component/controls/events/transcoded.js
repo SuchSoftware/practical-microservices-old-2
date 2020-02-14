@@ -9,7 +9,7 @@ module.exports = {
       type: 'Transcoded',
       metadata: {},
       data: {
-        transcodedUri: this.destination()
+        uri: this.destination()
       }
     }
   },
