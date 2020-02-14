@@ -4,6 +4,7 @@
 // system.
 
 const createHomeApplication = require('./home-application')
+const createKnexClient = require('./knex-client')
 const createPostgresClient = require('./postgres-client')
 const createMessageStore = require('./message-store')
 const createTranscodeComponent = require('./transcode-component')
@@ -22,8 +23,15 @@ function createConfig ({ env }) {
   // Postgres™.
   const messageStore = createMessageStore({ db: postgresClient })
 
+  const knexClient = createKnexClient({
+    connectionString: env.databaseUrl
+  })
+
   // Applications
-  const homeApplication = createHomeApplication()
+  const homeApplication = createHomeApplication({
+    db: knexClient,
+    messageStore
+  })
 
   // Components
   const transcodeComponent = createTranscodeComponent({ messageStore })
