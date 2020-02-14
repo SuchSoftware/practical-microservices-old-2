@@ -41,6 +41,14 @@ Read back: {
 }
 ```
 
+## Slides
+
+[There are slides for this workshop](https://docs.google.com/presentation/d/1xhpC7SqrIUBo1ar4ykN7a0-snipIVtnpcpHYIauafGU/edit?usp=sharing).
+
+## Instructor Guide
+
+The script we'll follow is in the `instructor-guide.md` file in this repo.
+
 ## Other Useful Software
 
 * A database view, such as TablePlus (https://tableplus.com/).  It absolutely does not have to be this particular one, but you will benefit greatly from having something that will let you view the contents of the databases started in the `docker-compose.yml` file.

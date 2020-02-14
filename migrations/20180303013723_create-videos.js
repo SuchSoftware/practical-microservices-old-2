@@ -4,6 +4,7 @@ exports.up = knex =>
     table.string('name')
     table.string('uri')
     table.integer('sequence')
+    table.text('transcription')
   })
 
 exports.down = knex => knex.schema.dropTable('videos')

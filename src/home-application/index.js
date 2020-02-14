@@ -34,7 +34,7 @@ function createHandlers ({ messageStore, queries }) {
         },
         data: {
           videoId,
-          uri: 'pulledFromRequestBody'
+          uri: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
         }
       }
       // 3. Write that catalog command to the message store.  Notice this goes

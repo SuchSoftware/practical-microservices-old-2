@@ -11,6 +11,7 @@ const createTranscodeComponent = require('./transcode-component')
 const createTranscribeComponent = require('./transcribe-component')
 const createViewCountAggregator = require('./view-count-aggregator')
 const createCatalogComponent = require('./catalog-component')
+const createVideoListAggregator = require('./video-list-aggregator')
 
 // Even the configuration has a dependency, namely the run-time environment.
 function createConfig ({ env }) {
@@ -39,13 +40,18 @@ function createConfig ({ env }) {
   const catalogComponent = createCatalogComponent({ messageStore })
 
   // Aggregators
+  const videoListAggregator = createVideoListAggregator({
+    db: knexClient,
+    messageStore
+  })
   const viewCountAggregator = createViewCountAggregator()
 
   const consumers = [
     transcodeComponent,
     transcribeComponent,
     catalogComponent,
-    viewCountAggregator
+    viewCountAggregator,
+    videoListAggregator
   ]
 
   return {
@@ -56,7 +62,8 @@ function createConfig ({ env }) {
     transcodeComponent,
     transcribeComponent,
     catalogComponent,
-    viewCountAggregator
+    viewCountAggregator,
+    videoListAggregator
   }
 }
 

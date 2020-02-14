@@ -196,9 +196,9 @@ That’s why the view video route has the interstitial
 Notice that the reads are now just like any other HTTP handler you’ve work with before.  What we’ve done is decouple our write model from our read model
 
 
-Aggregating video publishing
+## Step 15: Aggregating the results into View Data
 
-Git checkout step-016
+`git checkout step-015`
 
-It’s just a component, but we call them out as aggregators to make the distinction
-The query needs to be idempotent.  Upserting gives us that.
+* It’s just a component, but we call them out as aggregators to make the distinction
+* The query needs to be idempotent.  Upserting gives us that.
