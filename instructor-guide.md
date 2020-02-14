@@ -122,25 +122,37 @@ Go through the slides up until "Let's Build It!"
 * Group codes this whole component
 * Given a projection with an `$init` property and a component file with the handler somewhat filled out.  Walk them through what they have to work with.
 
-## Step 8: Orchestrating Components
+## Step 8: Starting a Long-Running Process
 
 `git checkout step-08`
 
-* The catalog component needs to get the other 2 to do work
+* Exercise `exercises/06-handle-catalog-command.js`
+* The catalog component needs to get the other 2 to do work.  How does it do it?
+* We want to advance the process based off of our own events
 * The projection is already filled out
-* The catalog component will drive the process off of its own events.  It shouldn’t rely on other streams for its own state
 * Get a Catalog command transformed into a Started event
 
+## Step 9: Handling Started and Telling `transcode-component` to Transcode Videos
 
-Handling Received and telling move-file to move the file
-Git checkout step-009
+`git checkout step-09`
 
-Respond to our own event
-Make sure to set the origin stream name
-Use the video’s id for the stream so that idempotence works
-We expect to see more than 1 command.  Why?  Why does it not matter?
-Handling move-file Moved event
-Git checkout step-010
+* Exercise `exercises/07-handle-started-event.js`
+* Respond to our own event
+* Make sure to set the `originStreamName`
+* Use the video’s id for the transcode stream so that idempotence works
+* We expect to see more than 1 command.  Why?  Why does it not matter?
+
+
+## Step 10: Handling `transcode`'s Transcoded event
+
+`git checkout step-10`
+
+* Exercise `exercises/08-handle-transcoded-event-from-us.js`
+* The catalog component will drive the process off of its own events.  It shouldn’t rely on other streams for its own state
+* Idempotently copy the Transcoded event to the catalog stream
+
+
+
 
 Filter on origin stream name
 If it’s one of ours, idempotently record it
