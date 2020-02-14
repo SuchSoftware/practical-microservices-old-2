@@ -40,18 +40,62 @@ function createCommandHandlers ({ messageStore }) {
 function createEventHandlers ({ messageStore }) {
   return {
     async Started (started) {
-      // This is where we'll kick off the transcoding
+      const videoId = started.data.videoId
+      const streamName = `catalog-${videoId}`
+      const video = await messageStore.fetch(streamName, projection)
 
-      // TODO: 1. Load the entity
+      if (video.isTranscoded) {
+        console.log(`(${received.id}) Video already transcoded. Skipping`)
 
-      // TODO: 2. Make the handler idempotent.  Which value from the projection would
-      // tell us we don't need to transcode the file?
+        return true
+      }
 
-      // TODO: 3. Write a Transcode command for transcode
-      //   - Use our entity id as the id for the move command stream name
-      //   - Set the originStreamName in metadata
+      const transcode = {
+        id: uuid(),
+        type: 'Transcode',
+        metadata: {
+          traceId: started.metadata.traceId,
+          originStreamName: streamName
+        },
+        data: {
+          videoId,
+          uri: started.data.uri
+        }
+      }
+      const commandStream = `transcode:command-${videoId}`
 
-      return true
+      return messageStore.write(commandStream, transcode)
+    }
+  }
+}
+
+function createTranscodeEventHandlers ({ messageStore }) {
+  return {
+    async Transcoded (transcoded) {
+      // 1. Fetch the entity and make the handler idempotent
+      //   - Where can we find the streamName for the video entity?
+      const streamName = transcoded.metadata.originStreamName
+      const video = await messageStore.fetch(streamName, projection)
+
+      if (video.isTranscoded) {
+        console.log(`(${transcoded.id}) Video already transcoded. Skipping`)
+
+        return true
+      }
+
+      // 3. Write a Transcoded event to our stream
+      const videoTranscoded = {
+        id: uuid(),
+        type: 'Transcoded',
+        metadata: {
+          traceId: transcoded.metadata.traceId
+        },
+        data: {
+          transcodedUri: transcoded.data.transcodedUri
+        }
+      }
+
+      return messageStore.write(streamName, videoTranscoded)
     }
   }
 }
